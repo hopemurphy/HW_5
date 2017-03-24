@@ -6,6 +6,12 @@ Problem 1
   
   Two graphs are uploaded. Figure) for frequency=5.0 becuase the graph looks like a better fit
                            Figure2) for frequency=1.0 becuase it is a more reasonable guess
+  a)
+  
+  b)
+  
+  c)
   
   
 Problem 2
+  Is uploaded, but not completed yet. Will be completed over the weekend. 
