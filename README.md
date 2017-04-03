@@ -9,7 +9,7 @@ Problem 1
                            Figure2) for frequency=1.0 becuase it is a more reasonable guess
   
   Fitting_Weather2 is for 2008-2012 like it is asked for in the probblem, while Fitting_Weather is for all munich temperatures.
-                           There is a figure for this.
+                           There is a figure- Figure1_prob1.png
   a)
   
   b)
