@@ -21,23 +21,41 @@ stars=Data[1][cut]
 #len(stars)
 
 
+# Omitt outliers by creating boolean loop
+#cut2 = np.logical_and(stars > -400, stars < 400)
+#stars2 = stars[cut2]
+#t2 = t[cut2]
+#data2 = data[cut2]
+
+
 # Fit VHELIO_AVG(VERR) vs. GLON(no error needed)
 #	Fit three differenet functions: 1) Linear 2) Quadratic fit 3) Periodic (sin or cos)
 y = stars['VHELIO_AVG']
 x = stars['GLON']
+
 
 def linear(x, m, b):
 	return m*x+b
  
 popt, pcov = curve_fit(linear, x, y) 
 
+
+def quadratic_line(x, c, d, e):
+	return c*(x**2)+d*x+e
+ 
+popt2, pcov2 = curve_fit(quadratic_line, x, y) 
+
+
 xlin = np.linspace(0., 360., 360)
 
 # Generate plots
 p.plot(x, y, '.')  
 p.plot(xlin, linear(xlin, popt[0], popt[1]), label='Linear fit') # Linear
-p.xlim([0,360])
-p.plot()  # Quadratic fit
+p.plot(xlin, quadratic_line(xlin, popt2[0], popt2[1], popt2[2]), label='Quadratic fit')  # Quadratic fit
 p.plot()  # Periodic (sin or cos)
-
+p.xlim([0,360])
+p.ylim([-400,400])
+p.xlabel('GLON(no error needed)')
+p.ylabel('VHELIO_AVG(VERR)')
+p.title('VHELIO_AVG(VERR) vs. GLON(no error needed)')
 p.show()
