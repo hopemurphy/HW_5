@@ -18,4 +18,4 @@ Problem 1
   
   
 Problem 2
-  Is uploaded, but not completed yet. Will be completed over the weekend. 
+  figure_1.png is the figure for this graph.
