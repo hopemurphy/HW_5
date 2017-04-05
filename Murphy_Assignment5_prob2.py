@@ -48,11 +48,41 @@ popt2, pcov2 = curve_fit(quadratic_line, x, y)
 
 xlin = np.linspace(0., 360., 360)
 
+
+
+guess_a= 15.0 #amplitude
+guess_b= 10.0 #phase shift
+guess_c= 5.0 #offset
+guess_o= 6.0 #frequency
+# print(data)
+
+p0= [guess_o, guess_a, guess_b, guess_c]
+
+#Create the function we want to fit
+def F_t(x, omega, a, b, c):
+	return np.cos((omega*x)+b)*a +c
+
+
+# Do the fit
+fit= curve_fit(F_t, x, y, p0=p0)
+
+
+#Use this to plot our first estimate. This might be good enough. 
+data_first_guess= F_t(x, *p0)
+
+#Recreate the fitting curve using the optimized parameters
+data_fit= F_t(x, *fit[0])
+
+
+
+
 # Generate plots
 p.plot(x, y, '.')  
 p.plot(xlin, linear(xlin, popt[0], popt[1]), label='Linear fit') # Linear
 p.plot(xlin, quadratic_line(xlin, popt2[0], popt2[1], popt2[2]), label='Quadratic fit')  # Quadratic fit
-p.plot()  # Periodic (sin or cos)
+p.plot(xlin, F_t(xlin, *p0), label='First guess')
+p.plot(xlin, F_t(xlin, *fit[0]), label='After fitting')  # Periodic (sin or cos)
+p.legend()
 p.xlim([0,360])
 p.ylim([-400,400])
 p.xlabel('GLON(no error needed)')
